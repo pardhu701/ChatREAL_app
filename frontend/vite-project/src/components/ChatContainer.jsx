@@ -1,5 +1,5 @@
 import useChatStore from "../lib/useChatStore"
-import { useEffect } from "react"
+import { useEffect ,useRef} from "react"
 import ChatHeader from "./ChatHeader.jsx"
 import MessageInput from "./MessageInput.jsx"
 import MessageSkeleton from "./skele/MessageSkeleton.jsx"
@@ -8,9 +8,7 @@ export const ChatContainer = () => {
 
   const { messages, getMessages, isMessagesLoading, selectedUser,subscribeToMessages,  unsubscribeFromMessages } = useChatStore();
   const { authuser } = useAuthStore();
-  console.log(messages.senderId===authuser._id)
-  console.log("sdfs")
-  console.log(authuser)
+  const messageEndRef = useRef(null);
   useEffect(() => {
     getMessages(selectedUser._id);
     subscribeToMessages();
@@ -19,8 +17,14 @@ export const ChatContainer = () => {
     }
 
   }, [getMessages, selectedUser._id,subscribeToMessages,unsubscribeFromMessages]);
+  
+  useEffect(() => {
+    if (messageEndRef.current && messages) {
+      messageEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages]);
   if (isMessagesLoading) return (
-    <div className="flex-1 flex flex-col overflow-auto">
+    <div className="flex-1 flex flex-col">
       <ChatHeader />
       <MessageSkeleton />
       <MessageInput />
@@ -28,13 +32,13 @@ export const ChatContainer = () => {
   )
 
   return (
-    <div className="flex-1 flex flex-col overflow-auto">
+    <div className="flex-1 flex flex-col">
       <ChatHeader />
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
         {messages.map((message) => (
           <div
             key={message._id}
-            className={`chat ${message.senderId === authuser._id ? "chat-end bg-red-500" : "chat-start bg-blue-500"}`}
+            className={`chat ${message.senderId === authuser._id ? "chat-end " : "chat-start "}`}
 
            
           >

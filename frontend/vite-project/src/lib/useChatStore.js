@@ -15,8 +15,10 @@ const useChatStore = create((set,get) => ({
         set({isUserLoading:true}) 
         try{
             const res=await axiosInstance.get("/messages/users")
+          
            
             set({users:res.data});
+            
 
         }
         catch(err){
@@ -51,6 +53,7 @@ sendMessage:async(message)=>{
         console.log(messages)
     }
     catch(err){
+        
         toast.error(err.message)
     }
 },

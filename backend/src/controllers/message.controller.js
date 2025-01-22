@@ -2,7 +2,7 @@
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { User } from "../models/user.model.js";
 import { Message } from "../models/message.model.js";
-import { getReceivers } from "../lib/socket.js";
+import {getReceivers,io} from "../lib/socket.js";
  
 
 const getUsersForSidebar= asyncHandler(async (req, res) => {
@@ -11,7 +11,7 @@ const getUsersForSidebar= asyncHandler(async (req, res) => {
     const loggedInUserId = req.user.id;
     
     const filterUsers = await User.find({ _id: { $ne: loggedInUserId } }).select('-password');
-    console.log(filterUsers)
+    
     res.status(200).json(filterUsers)
  } )
 
@@ -37,7 +37,7 @@ const getMessages= async (req, res) => {
 const sendMessage= async (req, res) => {
     try {
         const { text,image } = req.body;
-        console.log(text)
+        
         const senderId = req.user.id;
         const {id:receiverId} = req.params;
 
@@ -47,11 +47,12 @@ const sendMessage= async (req, res) => {
             imageUrl=uploadResponse.secure_url
         }
         const newMessage = new Message({ senderId, receiverId,text:text,image:imageUrl });
+        await newMessage.save();
         const receiverSocketId=getReceivers(receiverId);
         if(receiverSocketId){
             io.to(receiverSocketId).emit('newMessage',newMessage);
         }
-        await newMessage.save();
+        
         res.status(200).json(newMessage);
     } catch (error) {
         res.status(500).json({ message: error.message });

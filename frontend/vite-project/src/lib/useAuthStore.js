@@ -9,6 +9,7 @@ export const useAuthStore = create((set,get) => ({
  isUpdatingProfile:false,
  onlineUsers:[],
  socket:null,
+ check:null,
  
  isCheckingAuth: true,
 
@@ -30,6 +31,7 @@ export const useAuthStore = create((set,get) => ({
      try{
          const res = await axiosInstance.post('/auth/login',Data);
          set({authuser:res.data});
+         
          toast.success('Login successful');
          get().connectSocket();
      } catch(error){
@@ -89,18 +91,20 @@ export const useAuthStore = create((set,get) => ({
 
  connectSocket: async () => {
    const {authuser}=get();
+   
    if(!authuser || get().socket?.connected) return;
-    const socket = io('http://localhost:5001',{
-query:{
-    userId:authuser._id
-}
-    });
+    const socket = io(`http://localhost:5001?userId=${authuser._id}`);
+   
     socket.connect();
+     console.log(socket)
     set({socket:socket});
     socket.on('welcome',(userIds)=>{
+      
         set({onlineUsers:userIds})
+      
        
     })
+  
  },
  disconnectSocket: async () => {
     if(get().socket?.connected) get().socket.disconnect();

@@ -7,7 +7,7 @@ const protectRoute = asyncHandler(async (req, res, next) => {
  
 
     if(!token){
-        return res.status(401).json({ message: "Unauthorized -  no no No Token Provided" });
+        return res.status(401).json({ message: "Unauthorized -  No Token Provided" });
     }
    const decoded =  jwt.verify(token,process.env.JWT_SECRET); 
  
@@ -20,6 +20,7 @@ const protectRoute = asyncHandler(async (req, res, next) => {
     return res.status(404).json({ message: "User not found" });
 }
    req.user=user;
+   
    next();
 })
 

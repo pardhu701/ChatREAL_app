@@ -40,3 +40,13 @@ html, body, #root {
   /* Dark semi-transparent overlay */
   z-index: -1; /* Ensure it stays behind content */
 }
+
+.animate {
+  opacity: 0;
+  transform: translateY(2rem);
+}
+
+.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}

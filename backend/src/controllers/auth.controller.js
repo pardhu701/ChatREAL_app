@@ -45,11 +45,12 @@ const signup = asyncHandler(
         if(!createdUser){
             throw new ApiError('user not found',404);
         }
-        return res.status(201).json(new ApiRes(
-            'success',
-             'user created successfully',
-          createdUser
-        ))
+        // return res.status(201).json(new ApiRes(
+        //     'success',
+        //      'user created successfully',
+        //   createdUser
+        // ))
+        return res.status(200).json(createdUser);
 
     }
 
@@ -75,11 +76,12 @@ const login = asyncHandler(
             throw new ApiError('user not found',404);
 
         }
-        return res.status(200).json(new ApiRes(
-            'success',
-             'user logged in successfully',
-          createdUser
-        ))
+        // return res.status(200).json(new ApiRes(
+        //     'success',
+        //      'user logged in successfully',
+        //   createdUser
+        // ))
+        return res.status(200).json(createdUser);
     }
 )
 
@@ -124,11 +126,12 @@ const logout = (req, res) => {
 
 const checkauth=(req,res)=>{
     try{
-        res.status(200).json(new ApiRes(
-            'success',
-             'user authenticated',
-          req.user
-        ))
+      res.status(200).json(req.user)
+        // res.status(200).json(new ApiRes(
+        //     'success',
+        //      'user authenticated',
+        //   req.user
+        // ))
 
 
     } catch(error){
