@@ -23,7 +23,7 @@ const Sidebar = () => {
     if (isUsersLoading) return <SidebarSkeleton />;
   
     return (
-      <aside className="flex h-[calc(100vh-64px)] bg-gray-900">
+      <aside className="flex flex-col h-[calc(100vh-64px)] bg-gray-900">
         <div className="border-b border-base-300 w-full p-5">
           <div className="flex items-center gap-2">
             <Users className="size-6" />
@@ -57,7 +57,7 @@ const Sidebar = () => {
             >
               <div className="relative mx-auto lg:mx-0">
                 <img
-                  src={user.profilePic || "/smile.jpg"}
+                  src={user.profilePic || "https://as1.ftcdn.net/jpg/08/85/24/26/1000_F_885242686_y4pGb1Uf5VsODSXcZBgTFTMSEjiqUQ97.jpg"}
                   alt={user.name}
                   className="size-12 object-cover rounded-full"
                 />

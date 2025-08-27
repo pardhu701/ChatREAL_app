@@ -6,6 +6,7 @@ import connectDB from './db/index.db.js'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import {app,server,io} from './lib/socket.js'
+import bodyParser from 'body-parser';
 
 
 //setting up the envirememt
@@ -20,12 +21,15 @@ app.use(express.json());
 //which allow to parser the cookie
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
+
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: 'https://87ba3b2917e1.ngrok-free.app',
     credentials: true
 }))
 
 //app routing middleware
+
+app.use(bodyParser.json({ limit: '1mb' }));
 app.use('/api/auth', authRoutes)
 app.use('/api/messages', messageRoutes)
 

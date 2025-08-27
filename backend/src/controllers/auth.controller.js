@@ -5,6 +5,7 @@ import { generateToken } from "../utils/token.js";
 import { ApiRes } from "../utils/ApiRes.js";
 import bcrypt from "bcryptjs";
 import cloudinary from "../utils/cloudinary.js";
+
 import { Client, Storage } from 'appwrite';
 import fs from 'fs';
 
@@ -98,7 +99,7 @@ const logout = (req, res) => {
     
 
 
-    export const updateProfile = async (req, res) => {
+   const updateProfile = async (req, res) => {
         try {
           const { profilePic } = req.body;
           const userId = req.user._id;
@@ -112,7 +113,7 @@ const logout = (req, res) => {
           console.log(uploadResponse);
           const updatedUser = await User.findByIdAndUpdate(
             userId,
-            { profilePic: "uu.jpg" },
+            { profilePic: "https://imagezila.com/wp-content/uploads/elementor/thumbs/boys-dp-39-qi57wvr6qu4dgc7azlkwtnnh7sik4di30k0vh6b1xk.jpeg" },
             { new: true }
           );
       
@@ -140,5 +141,5 @@ const checkauth=(req,res)=>{
 }
 
 
-export { signup, login, logout ,checkauth };
+export { signup, login, logout ,checkauth ,updateProfile};
 

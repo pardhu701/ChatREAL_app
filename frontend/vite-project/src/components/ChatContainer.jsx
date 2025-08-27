@@ -4,6 +4,7 @@ import ChatHeader from "./ChatHeader.jsx"
 import MessageInput from "./MessageInput.jsx"
 import MessageSkeleton from "./skele/MessageSkeleton.jsx"
 import { useAuthStore } from "../lib/useAuthStore";
+
 export const ChatContainer = () => {
 
   const { messages, getMessages, isMessagesLoading, selectedUser,subscribeToMessages,  unsubscribeFromMessages } = useChatStore();
@@ -47,8 +48,8 @@ export const ChatContainer = () => {
                 <img
                   src={
                     message.senderId === authuser._id
-                      ? authuser.profilePic || "/smile.jpg"
-                      : selectedUser.profilePic || "/smile.jpg"
+                      ? authuser.profilePic || "https://imagezila.com/wp-content/uploads/elementor/thumbs/boys-dp-42-qfofbbr01rmfn6ru36y01ks8kt51dskznje4u2y1zc.jpeg"
+                      : selectedUser.profilePic || "https://imagezila.com/wp-content/uploads/elementor/thumbs/boys-dp-49-qi57wtvid61st4a1akrnoo4k10rtozamcapwimdua0.jpeg"
                   }
                   alt="profile pic"
                 />

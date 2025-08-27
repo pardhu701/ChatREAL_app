@@ -41,6 +41,13 @@ const {authuser,logout} = useAuthStore()
           </div>
         ):(
           <div className="flex items-center space-x-4">
+             <Link
+             
+              to="/ProfilePage "
+               className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+            >
+              Profile
+            </Link>
            <Link
               onClick={() => {
                      logout();
@@ -51,6 +58,7 @@ const {authuser,logout} = useAuthStore()
             >
               Logout
             </Link>
+            
         </div>
 
         )}
