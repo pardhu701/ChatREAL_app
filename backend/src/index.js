@@ -32,6 +32,9 @@ app.use(cors({
 app.use(bodyParser.json({ limit: '1mb' }));
 app.use('/api/auth', authRoutes)
 app.use('/api/messages', messageRoutes)
+app.get("/hello", (req, res) => {
+  res.send("Hello World!");
+});
 
 //connecting db
 connectDB().then(() => {
