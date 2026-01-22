@@ -41,22 +41,27 @@ jobs:
   deploy-backend:
     name: Deploy Backend
     runs-on: ubuntu-latest
-    needs: deploy-frontend  # ensures frontend deploys first
-
+    needs: deploy-frontend
+  
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-
+  
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 20
-
+  
       - name: Install dependencies (backend)
         run: |
           cd backend
           npm install
-
+  
+      - name: Zip backend for deployment
+        run: |
+          cd backend
+          zip -r ../backend.zip .
+  
       - name: Deploy backend to Elastic Beanstalk
         uses: einaregilsson/beanstalk-deploy@v22
         with:
@@ -66,5 +71,5 @@ jobs:
           application_name: ${{ secrets.EB_APP_NAME }}
           environment_name: ${{ secrets.EB_ENV_NAME }}
           version_label: backend-${{ github.sha }}
+          deployment_package: backend.zip
           existing_bucket_name: ${{ secrets.EB_APP_NAME }}-deployments
-
