@@ -71,4 +71,5 @@ jobs:
           application_name: ${{ secrets.EB_APP_NAME }}
           environment_name: ${{ secrets.EB_ENV_NAME }}
           version_label: backend-${{ github.sha }}
+          deployment_package: backend.zip
           existing_bucket_name: ${{ secrets.S3_BUCKET_NAME }}
