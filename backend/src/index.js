@@ -32,7 +32,7 @@ app.use(bodyParser.json({ limit: '1mb' }));
 app.use('/api/auth', authRoutes)
 app.use('/api/messages', messageRoutes)
 app.get("/", (req, res) => {
-  res.send("Hello World!");
+  res.send("Hello Worldjjj!");
 });
 
 //connecting db
