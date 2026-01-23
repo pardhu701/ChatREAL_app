@@ -23,8 +23,7 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(cors({
-    origin: 'https://87ba3b2917e1.ngrok-free.app',
-    credentials: true
+    origin: '*'
 }))
 
 //app routing middleware
