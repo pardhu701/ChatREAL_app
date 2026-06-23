@@ -23,7 +23,7 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(cors({
-    origin: 'https://com-static-ui.s3.us-east-1.amazonaws.com',  // replace with your frontend URL
+    origin: 'https://34.228.80.120:3001',  // replace with your frontend URL
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true // <-- allow cookies/auth headers
@@ -31,7 +31,7 @@ app.use(cors({
 
 // Handle preflight requests
 app.options('*', cors({
-    origin: 'https://com-static-ui.s3.us-east-1.amazonaws.com',
+    origin: 'https://34.228.80.120:3001',
     credentials: true
 }));
 
